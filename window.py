@@ -1,40 +1,56 @@
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image, ImageTk
+import numpy as np
+import cv2
+from keras.models import load_model
+
+
+# Load saved Keras model
+model = load_model("D:\College\ML\Project\CNN.h5")
 
 # Function to open an image file
 def open_image():
-    file_path = filedialog.askopenfilename()
-    image = Image.open(file_path)
+    global image_path, image_tk
+    image_path = filedialog.askopenfilename()
+    image = Image.open(image_path)
     image = image.convert("RGB")
     image.thumbnail((400, 400))  # Resize image to fit in the window
-    update_canvas(image)
+    image_tk = ImageTk.PhotoImage(image)
+    canvas.create_image(canvas_width / 2, canvas_height / 2, image=image_tk)
 
 
-# Function to update canvas with processed image
-def update_canvas(image):
-    canvas.delete("all")  # Clear previous image from canvas
-    processed_image = process_image(image)
-    processed_image_tk = ImageTk.PhotoImage(processed_image)
-    canvas.image_tk = processed_image_tk  # Keep a reference to the image to prevent garbage collection
-    canvas.create_image(
-        canvas_width / 2, canvas_height / 2, anchor=tk.CENTER, image=processed_image_tk
-    )
+# Image preprocessing
+def preprocess_image(img):
+    if img.shape[-1] == 4:
+        img = img[..., :3]  # remove alpha channel
+    img = cv2.convertScaleAbs(img)
+    img = cv2.resize(img, (128, 128))
+    img = np.expand_dims(img, axis=0)
+    # Normalize pixel values
+    return img
 
 
-# Dummy function for image processing with ML model
-def process_image(image):
-    # Placeholder for ML model processing logic
-    # In this example, simply flip the image horizontally
-    processed_image = image.transpose(method=Image.Transpose.FLIP_LEFT_RIGHT)
-    return processed_image
-
-
-# Function to get prediction
 def get_prediction():
-    # Placeholder for ML model prediction logic
-    prediction = "Dummy Prediction"  # Replace with actual prediction logic
-    prediction_label.config(text="Prediction: " + prediction)
+    # Get processed image
+    image = Image.open(image_path)
+    print(np.array(image))
+    img = np.array(image)
+    processed_image = preprocess_image(np.array(image))
+    # Use model to make prediction
+    prediction = model.predict(processed_image)
+
+    # Convert prediction to class label
+    class_label = np.argmax(prediction, axis=1)[0]
+    print(prediction)
+
+    # Update prediction label
+    if class_label == 0:
+        prediction_label.config(text="Prediction: Young ")
+    elif class_label == 1:
+        prediction_label.config(text="Prediction: Middle")
+    else:
+        prediction_label.config(text="Prediction: Old")
 
 
 # Create main window
