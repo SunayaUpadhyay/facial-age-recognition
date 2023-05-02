@@ -24,7 +24,7 @@ The dataset used for this project is a collection of labeled face images categor
 - time &nbsp;&nbsp; `pip install time`
 
 ## Usage
-To test the model on a new image, run the attached python file predict.py and click on "Open Image" to be able to select an image that you wish to get the prediction for. Then, click on "Get Prediction" to view the prediction.
+To test the model on a new image, run the attached python file window.py and click on "Open Image" to be able to select an image that you wish to get the prediction for. Then, click on "Get Prediction" to view the prediction.
 ## License
 Copyright 2023 Sunaya Upadhyay and Aditya Gupta
 
