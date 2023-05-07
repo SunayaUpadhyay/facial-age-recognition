@@ -2,9 +2,14 @@
 
 This project is aimed at developing a machine learning model that can classify faces into three age groups: old, young, and middle. The model will use image processing techniques and machine learning algorithms to accurately categorize faces into the appropriate age group.
 
-## Dataset
+## Data Collection
 
-The images for our project have been taken from the IMDB-WIKI dataset. However, various modifications have been made to the dataset in order to make it usable for our project. This includes selecting a smaller subset of images, selecting images with just faces in them , cropping the faces from the images using the haar cascade algorithm and finally making a csv file of all image ids and their respective classes. You can find the dataset at this link: https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
+The images for our project have been taken from the IMDB-WIKI dataset. However, various modifications have been made to the dataset in order to make it usable for our project. This includes selecting a smaller subset of images, dividing them into various classes (i.e., OLD, MIDDLE and YOUNG), selecting images with just faces in them, cropping the faces from the images using the haar cascade algorithm and finally making a csv file of all image ids and their respective classes. You can find the dataset at this link: https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/. We used the following python scripts:
+
+- filter.py: pastes the images into different folders based on their class (i.e., OLD, MIDDLE and YOUNG)
+- combine+excel.py: combines the images from the three folders into one folder in a random order and also makes a csv file containing image ids and their respective classes.
+- crop.py: copies all the cropped faces from the images into another directory.
+- diff.py: returns the ids of images that the algorithm wasn't able to crop so that they can be deleted from the csv file.
 
 ## Installation
 
