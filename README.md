@@ -1,10 +1,10 @@
-# Face Age Group Classification
+# Face Age Group Classification- By Sunaya Upadhyay and Aditya Gupta
 
 This project is aimed at developing a machine learning model that can classify faces into three age groups: old, young, and middle. The model will use image processing techniques and machine learning algorithms to accurately categorize faces into the appropriate age group.
 
 ## Dataset
 
-The dataset used for this project is a collection of labeled face images categorized into three age groups: old, young, and middle. The dataset can be downloaded from https://www.kaggle.com/datasets/arashnic/faces-age-detection-dataset. The dataset contains 19906 images, with each image labeled with the corresponding age group.
+The images for our project have been taken from the IMDB-WIKI dataset. However, various modifications have been made to the dataset in order to make it usable for our project. This includes selecting a smaller subset of images, selecting images with just faces in them , cropping the faces from the images using the haar cascade algorithm and finally making a csv file of all image ids and their respective classes. You can find the dataset at this link: https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
 
 ## Installation
 
