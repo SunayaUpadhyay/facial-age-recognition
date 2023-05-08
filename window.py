@@ -25,7 +25,7 @@ def preprocess_image(img):
     if img.shape[-1] == 4:
         img = img[..., :3]  # remove alpha channel
     img = cv2.convertScaleAbs(img)
-    img = cv2.resize(img, (128, 128))
+    img = cv2.resize(img, (256, 256))
     img = np.expand_dims(img, axis=0)
     # Normalize pixel values
     return img
